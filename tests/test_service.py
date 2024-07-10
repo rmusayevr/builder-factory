@@ -124,7 +124,7 @@ def test_build_not_implemented():
         builder.build()
 
 
-def test_chicken_burger_builder():
+def test_cheese_burger_builder():
     builder = CheeseBurgerBuilder()
     builder.bread("Whole Wheat").patty("Chicken").sauce("Mayo").toppings(["Lettuce", "Tomato"])
     burger = builder.build()
