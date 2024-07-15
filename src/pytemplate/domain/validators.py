@@ -1,18 +1,17 @@
-from marshmallow import fields, Schema, validates, ValidationError
+import marshmallow
 
+class BurgerSchema(marshmallow.Schema):
+    bread = marshmallow.fields.Str(required=True)
+    patty = marshmallow.fields.Str(required=True)
+    sauce = marshmallow.fields.Str(required=False)
+    toppings = marshmallow.fields.List(marshmallow.fields.Str(), required=False)
 
-class BurgerSchema(Schema):
-    bread = fields.Str(required=True)
-    patty = fields.Str(required=True)
-    sauce = fields.Str(required=False)
-    toppings = fields.List(fields.Str(), required=False)
-
-    @validates("bread")
+    @marshmallow.validates("bread")
     def validate_bread(self, value):
         if not value:
-            raise ValidationError("Bread is required.")
+            raise marshmallow.ValidationError("Bread is required.")
 
-    @validates("patty")
+    @marshmallow.validates("patty")
     def validate_patty(self, value):
         if not value:
-            raise ValidationError("Patty is required.")
+            raise marshmallow.ValidationError("Patty is required.")

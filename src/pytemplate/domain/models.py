@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from marshmallow import ValidationError
+import marshmallow
 
 from src.pytemplate.domain.validators import BurgerSchema
 
@@ -21,6 +21,6 @@ class Burger:
 def burger_factory(data):
     try:
         validated_data = BurgerSchema().load(data)
-    except ValidationError as err:
-        raise ValidationError(f"Invalid input data: {err.messages}") from err
+    except marshmallow.ValidationError as err:
+        raise marshmallow.ValidationError(f"Invalid input data: {err.messages}") from err
     return Burger(**validated_data)
